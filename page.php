@@ -1,9 +1,5 @@
 <?php	
 	include "html_top.html" ;
-	if ($_POST['exit']) /* была нажата кнопка ВЫЙТИ */
-	{
-		header("Location:index.php");		
-	}
 	if ( $_POST ['check_enter'] )/* пришли данные от формы регистрации */
 	{		
 		include 'handler.php';			

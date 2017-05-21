@@ -8,6 +8,6 @@
 	{
 		unset ( $_POST['press'] );
 		$counter++;
-		eneter_counter($_SESSION['user_id'], $counter, $connect); /* записываем показания счетчика */
+		eneter_counter($_SESSION['user_id'], $connect); /* записываем показания счетчика */
 	}
 ?>

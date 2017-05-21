@@ -62,7 +62,6 @@
 	function get_counter ( $user_id, $connect ) /* получить счетчек */
 	{
 		$table = 'counter';
-		$user_name = mysqli_real_escape_string($connect, $user_name);
 		$result_set =  mysqli_query( $connect, " SELECT `count` FROM `$table` WHERE `id` = '$user_id' ");
 		$count = $result_set->fetch_assoc();		
 		if($count)
@@ -74,23 +73,22 @@
 			return false;
 		}		
 	}
-	function eneter_counter($user_id, $counter, $connect) /* изменить значение счетчика */
+	function eneter_counter($user_id, $connect) /* изменить значение счетчика */
 	{
 		$table = 'counter';
-		$success = mysqli_query ( $connect, " UPDATE `$table` SET `count` = '$counter' 
+		$success = mysqli_query ( $connect, " UPDATE `$table` SET `count` = `count`+1
 		WHERE `id` = '$user_id' " );
 	}
 	function enterance( $user_name, $user_password, $connect) /* вход в аккаунт */
 	{
 		$table = 'counter';
-		$user_name_escape = mysqli_real_escape_string($connect, $user_name);
+		$user_name = mysqli_real_escape_string($connect, $user_name);
 		$result_set = mysqli_query ($connect, " SELECT `id`, `pass` FROM `$table` 
-		WHERE `name`='$user_name_escape' "); 
-		$received_pass_array = $result_set->fetch_assoc();
-		if($received_pass_array) 
+		WHERE `name`='$user_name' "); 		
+		if( $received_pass_array = $result_set->fetch_assoc() ) 
 		{			
-			$val = $received_pass_array ['pass'];			
-			if (password_verify($user_password, $val))
+			$pass = $received_pass_array ['pass'];			
+			if (password_verify($user_password, $pass))
 			{
 				return $received_pass_array ['id'];
 			}
@@ -103,9 +101,5 @@
 		{
 			return false;
 		}
-	}
-	function closeDB($mysqli)	
-	{
-		$mysqli->close();
-	}
+	}	
 ?>

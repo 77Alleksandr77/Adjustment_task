@@ -4,7 +4,7 @@
 	$connect = connectDB();
 	if ($_POST['exit']) /* была нажата кнопка ВЫЙТИ */
 	{
-		unset( $_SESSION['user_id'], $_SESSION['counter'], $_SESSION ['my_error'] );
+		unset( $_SESSION['user_id'], $_SESSION['counter'] );
 		header("Location:index.php");
 	}	
 	require_once 'page.php';	

@@ -1,17 +1,19 @@
 <?php
 	$error = false;
 	/* если авторизация прошла успешно*/
-	if($_SESSION['user_name'])
+	if($_SESSION['user_id'])
 	{
+		unset ( $_SESSION ['my_error'] );//незачем он уже!
 		header("Location:index.php");
 	}
+	/* если нажата кнопка "Зарегистрироваться" */
 	if ( $_POST['check'] )
 	{
 		header("Location:for_check.php");
 	}
 	else
 	{
-		$flag = false ;//процесс входа лили регистрации только при $flag == false
+		$flag = false ;//процесс входа или регистрации только при $flag == false
 		if ( !$_POST['user_name'] )
 		{
 			if (  $_POST['user_name'] != '0' )
@@ -33,7 +35,7 @@
 			if ( $_POST ['password'] != '0' ) 
 			{
 				/* $error[] = "Пароль не введён"; */
-				$flag = true;////процесс входа лили регистрации запущен не будет
+				$flag = true;////процесс входа или регистрации запущен не будет
 			}	
 			elseif ( $_POST ['check_enter']) //проверяем толко если данные получены от формы регистрации
 			{
@@ -96,8 +98,7 @@
 				$_SESSION['user_id'] = enterance( $user_name, $password, $connect);
 			}
 			/* сообщение появится только когда заполнены все поля, а авторизация == false */
-			if ( !$_SESSION['user_id'] && !$flag)
-			
+			if ( !$_SESSION['user_id'] && !$flag)			
 			{
 				$error[] = "Не верный логин или пароль!";	
 			}

@@ -38,7 +38,7 @@
 		?>
 			<form  action="" method="post">			
 			Нажмите на кнопу<br>
-			<button name='press' value='1'>+1</button><br>			
+			<button name='press' value='1'>+1</button>&nbsp			
 			<button name='exit' value='1'>выход</button>
 			</form>
 		<?php
